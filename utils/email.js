@@ -4,12 +4,23 @@ const { mailModel } = require("./mailModel");
 const sendEmail = async (email, subject, variant, link, firstName, lastName) => {
   try {
     let transporter = nodemailer.createTransport({
-      service: process.env.SERVICE,
+      // service: process.env.SERVICE,
+      // auth: {
+      //   user: process.env.USER,
+      //   pass: process.env.PASS,
+      // },
+      // tls: {
+      //   rejectUnauthorized: false,
+      // },
+      host: process.env.HOST,
+      port: process.env.PORT_SMTP,
+      secure: process.env.SECURE === "true", // use TLS
       auth: {
         user: process.env.USER,
         pass: process.env.PASS,
       },
       tls: {
+        // do not fail on invalid certs
         rejectUnauthorized: false,
       },
     });
@@ -23,18 +34,21 @@ const sendEmail = async (email, subject, variant, link, firstName, lastName) => 
     console.log("email sent sucessfully");
   } catch (error) {
     console.log("email not sent");
-    throw "Email n'est pas envoyé"
+    throw "Email n'est pas envoyé";
   }
 };
 
 const verifyTransporter = () => {
   let transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: process.env.HOST,
+    port: process.env.PORT_SMTP,
+    secure: process.env.SECURE === "true", // use TLS
     auth: {
       user: process.env.USER,
       pass: process.env.PASS,
     },
     tls: {
+      // do not fail on invalid certs
       rejectUnauthorized: false,
     },
   });
