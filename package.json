@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server",
-    "dev": "npx nodemon server",
+    "start": "pm2 start ecosystem.config.json --no-daemon",
+    "start:dev": "pm2 start ecosystem.config.json --no-daemon --env dev",
+    "dev": "cross-env NODE_ENV=development nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -20,7 +21,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.9",
     "nodemailer": "^6.7.3",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "pm2": "^5.2.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
