@@ -9,6 +9,8 @@ const imagesRouter = require("./routes/images.routes");
 const { verifyTransporter } = require("./utils/email");
 
 const app = express();
+const cors = require("cors");
+app.use(cors());
 app.use("/staticFiles", express.static(__dirname + "/assets"));
 
 app.use(express.json());
