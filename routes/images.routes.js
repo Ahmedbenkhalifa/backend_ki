@@ -8,7 +8,7 @@ const GetImages = async (req, res) => {
   fs.readdir(process.cwd() + "/assets/images", (err, files) => {
     try {
       files.forEach((file) => {
-        if (process.env.NODE_ENV === "developement") {
+        if (process.env.NODE_ENV === "development") {
           imagesCarousel.push(
             `http://localhost:${
               process.env.PORT ? process.env.PORT : "8080"
