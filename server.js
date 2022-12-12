@@ -7,7 +7,7 @@ const clientRouter = require("./routes/client.routes");
 const publicationRouter = require("./routes/publication.routes");
 const imagesRouter = require("./routes/images.routes");
 const { verifyTransporter } = require("./utils/email");
-
+console.log("first")
 const app = express();
 const cors = require("cors");
 app.use(cors());
