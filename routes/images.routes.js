@@ -15,7 +15,7 @@ const GetImages = async (req, res) => {
             }/staticFiles/images/${file}`
           );
         } else {
-          imagesCarousel.push(`${process.env.DOMAIN}/staticFiles/images/${file}`);
+          imagesCarousel.push(`${process.env.API_DOMAIN}/staticFiles/images/${file}`);
         }
       });
       res.status(200).send(imagesCarousel);

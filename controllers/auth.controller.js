@@ -8,7 +8,7 @@ const register = async (req, res) => {
   try {
     let user = await User.findOne({ email });
     if (user) {
-      throw "e-mail déja existe"
+      throw "e-mail déja existe";
     }
 
     user = new User({ firstName, lastName, companyName, email, password, region });
@@ -18,7 +18,7 @@ const register = async (req, res) => {
     const payload = { user: user };
     const token = jwt.sign(payload, process.env.SECRET);
 
-    const link = `http://localhost:3000/verify/${token}`;
+    const link = `${process.env.DOMAIN}/verify/${token}`;
     await sendEmail(user.email, "verify email", "verify", link, user.firstName, user.lastName);
 
     res.send({
@@ -104,11 +104,11 @@ const forgotPassword = async (req, res) => {
 
     const payload = { id: user._id };
     const token = jwt.sign(payload, process.env.SECRET, { expiresIn: "1h" });
-    const link = `http://localhost:3000/forgotPassword/resetPassword?token=${token}`;
+    const link = `${process.env.DOMAIN}/forgotPassword/resetPassword?token=${token}`;
 
     await sendEmail(
       user.email,
-      "Mot de passe oublié",   
+      "Mot de passe oublié",
       "forgotPassword",
       link,
       user.firstName,
